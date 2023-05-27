@@ -11,9 +11,9 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import History from "./pages/History";
 
-import { Navigate, useLocation } from "react-router-dom";
+// import { Navigate, useLocation } from "react-router-dom";
 
-function MainRoutes({ nhost }) {
+function MainRoutes() {
   return useRoutes([
     {
       path: "/",
