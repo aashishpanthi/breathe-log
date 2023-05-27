@@ -1,3 +1,5 @@
+import WeatherInfo from "./WeatherInfo";
+
 const Hero = () => {
   return (
     <div className="max-w-screen-xl mx-auto p-4">
@@ -41,6 +43,8 @@ const Hero = () => {
           </button>
         </div>
       </form>
+
+      <WeatherInfo />
     </div>
   );
 };
