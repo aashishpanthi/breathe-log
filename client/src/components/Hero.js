@@ -1,6 +1,57 @@
 import WeatherInfo from "./WeatherInfo";
+import { useState, useEffect } from "react";
 
 const Hero = () => {
+  const [weather, setWeather] = useState({});
+  const [airQuality, setAirQuality] = useState({});
+  const [emergencyNumber, setEmergencyNumber] = useState(102);
+
+  // ask for the location and get the weather as well as the air quality
+  const fetchLocation = async () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setWeather(data);
+        });
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setAirQuality(data);
+        });
+
+      const username = "aashishpanthi";
+
+      // Construct the API URL
+      const apiUrl = `http://api.geonames.org/extendedFindNearbyJSON?lat=${latitude}&lng=${longitude}&username=${username}`;
+
+      // Make the API request
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          // Extract the emergency contact number from the API response
+          const emergencyNumber = data.geonames[0].emergency;
+          if (emergencyNumber) {
+            setEmergencyNumber(emergencyNumber);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    });
+  };
+
+  useEffect(() => {
+    fetchLocation();
+  }, []);
+
   return (
     <div className="max-w-screen-xl mx-auto p-4">
       <form className="max-w-screen-lg mx-auto mt-5">
@@ -44,7 +95,11 @@ const Hero = () => {
         </div>
       </form>
 
-      <WeatherInfo />
+      <WeatherInfo
+        weather={weather}
+        airQuality={airQuality}
+        emergencyNumber={emergencyNumber}
+      />
 
       <div className="flex flex-wrap justify-between mt-5">
         {/* Recommend to wear a mask */}
