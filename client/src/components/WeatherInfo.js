@@ -1,4 +1,4 @@
-import { Card, Text, Metric, Title } from "@tremor/react";
+import { Card, Text, Metric, Title, Divider } from "@tremor/react";
 import { Link } from "react-router-dom";
 
 const WeatherInfo = ({ weather, airQuality, emergencyNumber }) => {
@@ -96,6 +96,58 @@ const WeatherInfo = ({ weather, airQuality, emergencyNumber }) => {
         </div>
       </div>
 
+      <Divider />
+
+      {/* Show different particles present in air from air quality using online icons is possible */}
+      <div className="px-4 mt-5 pb-0">
+        <Text className="text-center">Particles present in air</Text>
+        <div className="flex justify-between  px-2 pt-2">
+          <div className="text-center">
+            <Title>{airQuality?.list?.[0]?.components?.pm10}</Title>
+            <Text>PM10</Text>
+          </div>
+
+          <div className="text-center">
+            <Title>{airQuality?.list?.[0]?.components?.pm2_5}</Title>
+            <Text>PM2.5</Text>
+          </div>
+
+          <div className="text-center">
+            <Title>{airQuality?.list?.[0]?.components?.no2}</Title>
+            <Text>
+              NO<sub>2</sub>
+            </Text>
+          </div>
+
+          <div className="text-center">
+            <Title>{airQuality?.list?.[0]?.components?.o3}</Title>
+            <Text>
+              O<sub>3</sub>
+            </Text>
+          </div>
+
+          <div className="text-center">
+            <Title>{airQuality?.list?.[0]?.components?.so2}</Title>
+            <Text>
+              SO<sub>2</sub>
+            </Text>
+          </div>
+
+          <div className="text-center">
+            <Title>{airQuality?.list?.[0]?.components?.co}</Title>
+            <Text>CO</Text>
+          </div>
+
+          <div className="text-center">
+            <Title>{airQuality?.list?.[0]?.components?.nh3}</Title>
+            <Text>
+              NH<sub>3</sub>
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      <Divider />
       <div className="flex flex-wrap justify-between mt-5">
         <div className="w-1/2 md:w-1/3 lg:w-1/4 text-center my-2 p-2">
           <img
