@@ -13,14 +13,14 @@ import History from "./pages/History";
 
 // import { Navigate, useLocation } from "react-router-dom";
 
-function MainRoutes() {
+function MainRoutes({ nhost }) {
   return useRoutes([
     {
       path: "/",
       element: <NavbarOnlyLayout />,
       children: [
         { path: "", element: <Home /> },
-        { path: "login", element: <Login /> },
+        { path: "login", element: <Login nhost={nhost} /> },
         { path: "register", element: <Register /> },
         { path: "settings", element: <Profile /> },
         { path: "history", element: <History /> },
@@ -30,17 +30,6 @@ function MainRoutes() {
   ]);
 }
 
-export default function Routes() {
-  //   const { isAuthenticated } = useAuthenticationStatus();
-  //   const location = useLocation();
-
-  //   if (isAuthenticated && location.pathname === "/") {
-  //     return <Navigate to="/app" />;
-  //   }
-
-  //   if (!isAuthenticated && location.pathname === "/app") {
-  //     return <Navigate to="/" />;
-  //   }
-
-  return <MainRoutes />;
+export default function Routes({ nhost }) {
+  return <MainRoutes nhost={nhost} />;
 }
