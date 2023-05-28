@@ -45,6 +45,10 @@ const Hero = () => {
       </form>
 
       <WeatherInfo />
+
+      <div className="flex flex-wrap justify-between mt-5">
+        {/* Recommend to wear a mask */}
+      </div>
     </div>
   );
 };
